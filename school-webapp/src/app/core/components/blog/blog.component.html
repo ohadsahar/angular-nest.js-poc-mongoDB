@@ -1,0 +1,23 @@
+<div class="blog-component">
+  <form class="new-blog">
+    <h1>Submit new blog</h1>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Insert your title" name="title" [(ngModel)]="blogData.title">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Insert your content" name="content" [(ngModel)]="blogData.content">
+    </mat-form-field>
+    <button type="button" mat-raised-button color="primary" (click)="submitNewBlog()">Submit Blog</button>
+  </form>
+  <mat-divider></mat-divider>
+  <section class="list-blogs">
+    <h1>List of blogs</h1>
+    <div *ngFor="let blog of blogArray">
+      <p>Id: {{blog?.id}}, Title: {{blog?.title}}, Content: {{blog?.content}}</p>
+      <button mat-raised-button color="warn" type="button" (click)="deleteBlog(blog?.id)">Delete me</button>
+    </div>
+    <section *ngIf="blogArray?.length <= 0">
+      <p>No blogs exists</p>
+    </section>
+  </section>
+</div>
