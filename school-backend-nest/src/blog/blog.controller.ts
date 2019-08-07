@@ -1,4 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { CreateBlogDto } from './dto/create-blog.dto';
+import { UpdateBlogDto } from './dto/update-blog.dto';
 import { BlogService } from './services/blog.service';
 
 @Controller('posts')
@@ -9,12 +11,12 @@ export class BlogController {
         return await this.blogService.findAll();
     }
     @Post()
-    async createNewBlog(@Body('title') title: string, @Body('content') content: string) {
-        return await this.blogService.createBlog(title, content);
+    async createNewBlog(@Body() createBlogDto: CreateBlogDto) {
+        return await this.blogService.createBlog(createBlogDto);
     }
     @Put(':blogid')
-    async update(@Param('blogid') blogid: string, @Body('id') id: string, @Body('title') title: string, @Body('content') content: string ) {
-        return await this.blogService.updateBlog(id, title, content);
+    async update(@Param('blogid') blogid: string, @Body() updateBlogDto: UpdateBlogDto) {
+        return await this.blogService.updateBlog(updateBlogDto);
     }
     @Delete(':blogid')
     async deleteBlog(@Param('blogid') blogid: string) {

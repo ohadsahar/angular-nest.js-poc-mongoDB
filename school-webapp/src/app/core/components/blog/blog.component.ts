@@ -1,9 +1,9 @@
-import { MessageService } from '../../services/message.service';
-import { BlogService } from '../../services/blog.service';
-
-
-import { BlogModel } from './../../../shared/models/blog.model';
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../../services/blog.service';
+import { MessageService } from '../../services/message.service';
+import { BlogModel } from './../../../shared/models/blog.model';
+
+
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -44,7 +44,7 @@ export class BlogComponent implements OnInit {
     this.blogData.id = id;
     this.blogService.update(this.blogData).subscribe(response => {
       const index = this.blogArray.findIndex(blog => blog.id === id);
-      console.log(response.message);
+      console.log(response);
     });
   }
   deleteBlog(blogid: string) {

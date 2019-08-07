@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BlogModel } from '../models/blog.model';
+import { CreateBlogDto } from './../dto/create-blog.dto';
+import { UpdateBlogDto } from './../dto/update-blog.dto';
 
 @Injectable()
 export class BlogService {
@@ -14,8 +16,8 @@ export class BlogService {
             content: blog.content,
         }));
     }
-    async createBlog(title: string, content: string) {
-        const newBlog = new this.blogSchema({ title, content });
+    async createBlog(createBlogDto: CreateBlogDto) {
+        const newBlog = new this.blogSchema({ title: createBlogDto.title, content: createBlogDto.content });
         const result = await newBlog.save();
         const blog = {
             id: result._id,
@@ -24,11 +26,9 @@ export class BlogService {
         };
         return blog;
     }
-
-    async updateBlog(id: string, title: string, content: string) {
-        const data = { id, title, content };
-        await this.blogSchema.findByIdAndUpdate({ _id: id }, data).exec();
-        return data;
+    async updateBlog(updateBlogDto: UpdateBlogDto) {
+        await this.blogSchema.findByIdAndUpdate({ _id: updateBlogDto.id }, updateBlogDto).exec();
+        return updateBlogDto;
     }
     async delete(blogid: string) {
         return await this.blogSchema.deleteOne({ _id: blogid }).exec();
