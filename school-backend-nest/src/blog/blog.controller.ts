@@ -8,18 +8,38 @@ export class BlogController {
     constructor(private readonly blogService: BlogService) { }
     @Get()
     async findAll() {
-        return await this.blogService.findAll();
+        try {
+            const resultAllBlogs = await this.blogService.findAll();
+            return { message: resultAllBlogs, success: true };
+        } catch (error) {
+            return { message: error, success: false };
+        }
     }
     @Post()
     async createNewBlog(@Body() createBlogDto: CreateBlogDto) {
-        return await this.blogService.createBlog(createBlogDto);
+        try {
+            const resultRegister = await this.blogService.createBlog(createBlogDto);
+            return { message: resultRegister, success: true };
+        } catch (error) {
+            return { message: error, success: false };
+        }
     }
     @Put(':blogid')
     async update(@Param('blogid') blogid: string, @Body() updateBlogDto: UpdateBlogDto) {
-        return await this.blogService.updateBlog(updateBlogDto);
+        try {
+            const resultUpdate = await this.blogService.updateBlog(updateBlogDto);
+            return { message: resultUpdate, success: true };
+        } catch (error) {
+            return { message: error, success: false };
+        }
     }
     @Delete(':blogid')
     async deleteBlog(@Param('blogid') blogid: string) {
-        return await this.blogService.delete(blogid);
+        try {
+            const resultDelete = await this.blogService.delete(blogid);
+            return { message: resultDelete, success: true };
+        } catch (error) {
+            return { message: error, success: false };
+        }
     }
 }
