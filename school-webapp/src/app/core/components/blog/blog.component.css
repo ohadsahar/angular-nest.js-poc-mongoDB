@@ -1,17 +1,17 @@
 .full-width {
   width: 100%;
 }
-
 .new-blog {
   margin: auto;
   max-width: 400px;
   margin-bottom: 3%;
 }
-
 .new-blog h1 {
   text-align: center;
 }
-
 .list-blogs {
   text-align: center;
+}
+.list-blogs .mat-raised-button {
+  margin-right: 3%;
 }

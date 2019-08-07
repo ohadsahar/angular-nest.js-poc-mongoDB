@@ -17,6 +17,10 @@ export class BlogService {
   get() {
     return this.http.get<{ message: BlogModel }>(backendUrl);
   }
+  update(blogData: BlogModel) {
+    const blogid = blogData.id;
+    return this.http.put<{ message: BlogModel }>(`${backendUrl}/${blogid}`, blogData);
+  }
   delete(blogid: string) {
     return this.http.delete<{ message: BlogModel }>(`${backendUrl}/${blogid}`);
   }

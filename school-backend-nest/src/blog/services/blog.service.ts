@@ -24,6 +24,12 @@ export class BlogService {
         };
         return blog;
     }
+
+    async updateBlog(id: string, title: string, content: string) {
+        const data = { id, title, content };
+        await this.blogSchema.findByIdAndUpdate({ _id: id }, data).exec();
+        return data;
+    }
     async delete(blogid: string) {
         return await this.blogSchema.deleteOne({ _id: blogid }).exec();
     }

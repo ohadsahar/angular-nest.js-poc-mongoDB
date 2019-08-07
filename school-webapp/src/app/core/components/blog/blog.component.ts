@@ -13,9 +13,11 @@ import { Component, OnInit } from '@angular/core';
 export class BlogComponent implements OnInit {
   blogData = new BlogModel(null, '', '');
   blogArray: BlogModel[];
+  editable: any;
 
   constructor(private blogService: BlogService, private messageService: MessageService) {
     this.blogArray = [];
+    this.editable = {};
   }
 
   ngOnInit() {
@@ -36,6 +38,14 @@ export class BlogComponent implements OnInit {
         this.messageService.message(error, 'Dismiss');
       });
     }
+  }
+
+  updateBlog(id: string) {
+    this.blogData.id = id;
+    this.blogService.update(this.blogData).subscribe(response => {
+      const index = this.blogArray.findIndex(blog => blog.id === id);
+      console.log(response.message);
+    });
   }
   deleteBlog(blogid: string) {
     this.blogService.delete(blogid).subscribe(response => {
