@@ -7,27 +7,36 @@
     <mat-form-field class="full-width">
       <input matInput type="text" placeholder="Insert your content" name="content" [(ngModel)]="blogData.content">
     </mat-form-field>
-    <button type="button" mat-raised-button color="primary" (click)="submitNewBlog()">Submit task</button>
+    <button type="button" mat-raised-button color="primary" class="submit-task" (click)="submitNewBlog()">Submit
+      task</button>
   </form>
   <mat-divider></mat-divider>
   <section class="list-blogs">
     <h1>List of tasks</h1>
     <div *ngFor="let blog of blogArray; let i = index">
-      <p *ngIf="!editable[i]"> Title: {{blog?.title}}, Content: {{blog?.content}}</p>
+      <section *ngIf="!editable[i]" class="tasks-list">
+        <p>Title: {{blog?.title}}</p>
+        <p> Content: {{blog?.content}}</p>
+      </section>
       <form class="new-blog" *ngIf="editable[i]">
-          <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Insert your title" name="title" [(ngModel)]="blogData.title" value="blog?.title">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Insert your content" name="content" [(ngModel)]="blogData.content" value="blog?.title">
-          </mat-form-field>
-          <button type="button" mat-raised-button color="primary" (click)="updateBlog(blog?.id);editable[i] = !editable[i]">Update blog</button>
-        </form>
-      <button mat-raised-button color="accent" type="button" (click)="editable[i] = !editable[i]" *ngIf="!editable[i]">Edit me</button>
-      <button mat-raised-button color="warn" type="button" (click)="deleteBlog(blog?.id)" *ngIf="!editable[i]">I'm done</button>
+        <mat-form-field class="full-width">
+          <input matInput type="text" placeholder="Insert your title" name="title" [(ngModel)]="blogData.title"
+            value="blog?.title">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput type="text" placeholder="Insert your content" name="content" [(ngModel)]="blogData.content"
+            value="blog?.title">
+        </mat-form-field>
+        <button type="button" mat-raised-button color="primary"
+          (click)="updateBlog(blog?.id);editable[i] = !editable[i]">Update blog</button>
+      </form>
+      <button mat-raised-button color="accent" type="button" (click)="editable[i] = !editable[i]"
+        *ngIf="!editable[i]">Edit me</button>
+      <button mat-raised-button color="warn" type="button" (click)="deleteBlog(blog?.id)" *ngIf="!editable[i]">I'm
+        done</button>
     </div>
     <section *ngIf="blogArray?.length <= 0">
-      <p>No blogs exists</p>
+      <p>No tasks exists</p>
     </section>
   </section>
 </div>

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:3000/posts'
+  backendUrl: 'http://localhost:3000/posts',
+  backendUrlOldTasks: 'http://localhost:3000/task'
 };
 
 /*

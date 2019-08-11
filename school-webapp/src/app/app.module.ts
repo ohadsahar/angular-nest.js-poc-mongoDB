@@ -7,11 +7,13 @@ import { BlogComponent } from './core/components/blog/blog.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { OldTasksComponent } from './core/components/old-tasks/old-tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogComponent
+    BlogComponent,
+    OldTasksComponent
   ],
   imports: [
     BrowserModule,
